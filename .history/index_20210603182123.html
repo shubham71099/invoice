@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Shubham Jha (Invoice)</title>
+    <script
+      type="text/javascript"
+      src="//code.jquery.com/jquery-1.10.2.js"
+    ></script>
+    <script src="pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script type="text/javascript">
+      function sum() {
+        var txtFirstNo = document.getElementById("txtFirstNo").value;
+        var txtSecondNo = document.getElementById("txtSecondNo").value;
+        var result = parseInt(txtFirstNo) * parseInt(txtSecondNo);
+        if (!isNaN(result)) {
+          document.getElementById("txtResult").value = result;
+          document.getElementById("final").value = result;
+        }
+      }
+    </script>
+    <script>
+      function showalert() {
+        alert(
+          "Welcome To Invoice Generator By Shubham \n To save invoice as PDF press (CTRL+P)"
+        );
+      }
+    </script>
+  </head>
+
+  <body onload="showalert()">
+    <div class="my-5 page" size="A4">
+      <div class="p-5">
+        <section class="top-content bb d-flex justify-content-between">
+          <div class="logo">
+            <img src="logo.png" alt="" class="img-fluid" />
+          </div>
+          <div class="top-left">
+            <div class="graphic-path">
+              <p>Invoice</p>
+            </div>
+            <div class="position-relative">
+              <p>
+                Invoice No.:
+                <input
+                  style="border: none"
+                  type="text"
+                  size="7"
+                  placeholder="Enter Here "
+                />
+              </p>
+              <p>Date : <input style="border: none" type="date" /></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="store-user mt-5">
+          <div class="col-10">
+            <div class="row bb pb-3">
+              <div class="col-7">
+                <p>From,</p>
+                <h6>
+                  <input
+                    style="border: none"
+                    type="text"
+                    size="20"
+                    placeholder="Enter Company Name"
+                  />
+                </h6>
+                <p class="address">
+                  <td>
+                    <input
+                      style="border: none"
+                      type="text"
+                      size="20"
+                      placeholder="Address "
+                    />
+                  </td>
+                  <br />
+                  <td>
+                    <input
+                      style="border: none"
+                      type="text"
+                      size="20"
+                      placeholder="City "
+                    />
+                  </td>
+                  <br />
+                  <td>
+                    <input
+                      style="border: none"
+                      type="text"
+                      size="20"
+                      placeholder="State "
+                    />
+                  </td>
+                </p>
+                <div class="txn mt-2">
+                  GSTIN:
+                  <td>
+                    <input style="border: none" type="text" size="12" />
+                  </td>
+                </div>
+              </div>
+              <div class="col-5">
+                <p>Bill To,</p>
+                <h6>
+                  <input
+                    style="border: none"
+                    type="text"
+                    size="20"
+                    placeholder="Enter Buyer Name"
+                  />
+                </h6>
+                <p class="address">
+                  <td>
+                    <input
+                      style="border: none"
+                      type="text"
+                      size="20"
+                      placeholder="Address "
+                    />
+                  </td>
+                  <br />
+                  <td>
+                    <input
+                      style="border: none"
+                      type="text"
+                      size="20"
+                      placeholder="City "
+                    />
+                  </td>
+                  <br />
+                  <td>
+                    <input
+                      style="border: none"
+                      type="text"
+                      size="20"
+                      placeholder="State "
+                    />
+                  </td>
+                </p>
+                <div class="txn mt-2">
+                  GSTIN:
+                  <td><input style="border: none" type="text" size="10" /></td>
+                </div>
+              </div>
+            </div>
+            <div class="row extra-info pt-3">
+              <div class="col-7">
+                <p>
+                  Payment Method :
+                  <span>
+                    <select name="payment" id="cars">
+                      <option value="cash">Cash</option>
+                      <option value="Online">Online</option>
+                      <option value="EMI">EMI</option>
+                    </select>
+                  </span>
+                </p>
+              </div>
+              <div class="col-5">
+                <p>
+                  Reference No. :
+                  <span>
+                    <td>
+                      <input
+                        style="border: none"
+                        type="text"
+                        size="7"
+                        placeholder="  -"
+                      /></td
+                  ></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="product-area mt-4">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <td>Item Description</td>
+                <td>Qty</td>
+                <td>Rate</td>
+                <td>Total</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input style="border: none" type="text" size="25" /></td>
+
+                <td>
+                  <input
+                    style="border: none"
+                    type="text"
+                    id="txtFirstNo"
+                    size="4"
+                    onkeyup="sum()"
+                  />
+                </td>
+                <td>
+                  <input
+                    style="border: none"
+                    type="text"
+                    id="txtSecondNo"
+                    size="4"
+                    onkeyup="sum()"
+                  />
+                </td>
+                <td>
+                  <input
+                    style="border: none"
+                    type="text"
+                    size="4"
+                    id="txtResult"
+                    readonly
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="balance-info">
+          <div class="row">
+            <div class="col-8">
+              <p class="m-0 font-weight-bold">Note:</p>
+              <textarea
+                style="border: none"
+                placeholder="Enter Note Here"
+              ></textarea>
+            </div>
+            <div class="col-4">
+              <br />
+              <table class="table border-0 table-hover">
+                <tfoot>
+                  <br />
+                  <tr>
+                    <td>Total Amount (₹):</td>
+                    <td>
+                      <input
+                        style="border: none"
+                        type="text"
+                        size="4"
+                        id="final"
+                        readonly
+                      />
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+              <br /><br />
+              <!-- Signature -->
+              <div class="col-12">
+                <br /><br /><br />
+
+                <p class="text-center m-0">Authorised Signatory</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Cart BG -->
+        <img src="cart.jpg" class="img-fluid cart-bg" alt="" />
+
+        <footer>
+          <hr />
+
+          <div class="social pt-3">
+            <span class="pr-2">
+              <p>Designed By</p>
+              <span>0123456789</span>
+            </span>
+            <span class="pr-2">
+              <i class="fas fa-mobile-alt"></i>
+              <span>0123456789</span>
+            </span>
+            <span class="pr-2">
+              <i class="fas fa-envelope"></i>
+              <span>shubham71099@gmail.com</span>
+            </span>
+
+            <span class="pr-2">
+              <i class="fab fa-youtube"></i>
+              <span>/Shubham Jha</span>
+            </span>
+            <span class="pr-2">
+              <i class="fab fa-github"></i>
+              <span>/shubham71099</span>
+            </span>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
