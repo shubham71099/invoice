@@ -192,3 +192,52 @@ footer p {
   background-color: var(--white);
   display: inline-block;
 }
+/* Default styles for larger screens */
+body {
+  font-size: 16px;
+}
+
+.page {
+  width: 21cm;
+}
+
+.top-left .graphic-path p {
+  right: -100px;
+}
+
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 1200px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .page {
+    width: 100%;
+  }
+
+  .top-left .graphic-path p {
+    right: 0;
+    text-align: center;
+  }
+
+  .store-user .row {
+    flex-direction: column;
+  }
+
+  .extra-info {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .table th,
+  .table td {
+    font-size: 12px;
+  }
+
+  .cart-bg {
+    display: none;
+  }
+}
